@@ -42,7 +42,7 @@ import { useMutation } from "@tanstack/react-query";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import getTheme from "./theme";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://ai-project-production-af17.up.railway.app";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://localhost:8000";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { jsPDF } from "jspdf";
