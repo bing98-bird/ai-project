@@ -41,6 +41,8 @@ import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import getTheme from "./theme";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { jsPDF } from "jspdf";
@@ -176,7 +178,7 @@ const App = () => {
 
   const queryMutation = useMutation({
     mutationFn: async (userQuery) => {
-      const { data } = await axios.post("http://localhost:8000/api/query", {
+      const { data } = await axios.post(`${API_BASE_URL}/api/query`, {
         query: userQuery,
         session_id: "default_session_123",
       });
@@ -207,7 +209,7 @@ const App = () => {
       const formData = new FormData();
       formData.append("file", file);
       const { data } = await axios.post(
-        "http://localhost:8000/api/ingest",
+        `${API_BASE_URL}/api/ingest`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -228,7 +230,7 @@ const App = () => {
 
   const deleteMutation = useMutation({
     mutationFn: async (filename) => {
-      await axios.delete(`http://localhost:8000/api/delete/${filename}`);
+      await axios.delete(`${API_BASE_URL}/api/delete/${filename}`);
       return filename;
     },
     onSuccess: (filename) => {
@@ -243,7 +245,7 @@ const App = () => {
     mutationFn: async (filename) => {
       setAnalyzingFile(filename);
       const { data } = await axios.post(
-        `http://localhost:8000/api/analyze/${filename}`
+        `${API_BASE_URL}/api/analyze/${filename}`
       );
       return data;
     },
@@ -286,7 +288,7 @@ const App = () => {
     mutationFn: async (filename) => {
       setAnalyzingFile(filename);
       const { data } = await axios.post(
-        `http://localhost:8000/api/clean/${filename}`
+        `${API_BASE_URL}/api/clean/${filename}`
       );
       return data;
     },
@@ -484,7 +486,7 @@ const App = () => {
                     size="small"
                     onClick={() => {
                       const link = document.createElement("a");
-                      link.href = `http://localhost:8000/api/download/${encodeURIComponent(doc)}`;
+                      link.href = `${API_BASE_URL}/api/download/${encodeURIComponent(doc)}`;
                       link.download = doc;
                       document.body.appendChild(link);
                       link.click();
