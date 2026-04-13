@@ -32,7 +32,7 @@ vector_store = MongoDBAtlasVectorSearch(
     relevance_score_fn="cosine",
 )
 
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=api_key)
+llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite-preview", google_api_key=api_key)
 
 
 def _extract_text_from_pdf(file_path: str) -> List[dict]:

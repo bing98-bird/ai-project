@@ -14,7 +14,7 @@ from openpyxl.utils import get_column_letter
 load_dotenv()
 
 api_key = os.getenv("GEMINI_API_KEY")
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=api_key)
+llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite-preview", google_api_key=api_key)
 
 
 def _detect_outliers(series: pd.Series) -> Dict[str, Any]:
